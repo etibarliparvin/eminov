@@ -1,0 +1,80 @@
+version: '3.1'
+services:
+  postgres:
+    hostname: postgres-hostname
+    image: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PORT:5432
+      - POSTGRES_CONNECTION_IP:localhost
+      - POSTGRES_USERNAME:postgres
+      - POSTGRES_PASSWORD:112358
+    ports:
+      - 5432:5432
+    networks:
+      - test1_netw
+
+  test1:
+    image: test1:v1
+    ports:
+      - 8080:8080
+    environment:
+      POSTGRES_CONNECTION_IP: "postgres-hostname"
+    networks:
+      - test1_netw
+    depends_on:
+      - postgres
+
+networks:
+  test1_netw:
+volumes:
+  db_data:
+
+#version: '3.1'
+#services:
+#  mysql:
+#    hostname: mysql-hostname
+#    image: mysql
+#    container_name: test1-mysql
+#    volumes:
+#      - db_data:/var/lib/mysql
+#    environment:
+#      MYSQL_ROOT_PASSWORD: password
+#    ports:
+#      - 3306:3306
+#    networks:
+#      - test1_netw
+#  ms9:
+#    image: test1:v1
+#    ports:
+#      - 8080:8080
+#    environment:
+#      DB_CONNECTION_IP: "mysql-hostname"
+#    networks:
+#      - test1_netw
+#    depends_on:
+#      - mysql
+#
+#networks:
+#  test1_netw:
+#volumes:
+#  db_data:
+
+#  jdbc:mysql://localhost:3306/quotes?user=root&password=mauFJcuf5dhRMQrjj
+#version: '3.8'
+#services:
+#  db:
+#    image: mysql:8.0
+#    restart: always
+#    environment:
+#      - MYSQL_DATABASE=quotes
+#      - MYSQL_ROOT_PASSWORD=mauFJcuf5dhRMQrjj
+#    ports:
+#      - '3306:3306'
+#    volumes:
+#      - db:/var/lib/mysql
+##      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+#volumes:
+#  db:
+#    driver: local

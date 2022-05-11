@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://${POSTGRES_CONNECTION_IP:localhost}:${POSTGRES_PORT:5432}/test1?createDatabaseIfNotExists=true
+    username: ${POSTGRES_USERNAME:postgres}
+    password: ${POSTGRES_PASSWORD:112358}
+#    username: postgres
+#    password: 112358
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+#spring:
+#  datasource:
+#    type: com.zaxxer.hikari.HikariDataSource
+#    url: &connectionUrl jdbc:mysql://${DB_CONNECTION_IP:localhost}:${DB_CONNECTION_PORT:3306}/test1?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8
+#    username: root
+#    password: password
+#  jpa:
+#    hibernate.ddl-auto: validate
+#    generate-ddl: true
+#    show-sql: true
+
